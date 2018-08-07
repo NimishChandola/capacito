@@ -1,0 +1,69 @@
+{
+  "name": "capacito",
+  "version": "1.0.0",
+  "description": "capacity manager",
+  "main": "index.js --watch",
+  "scripts": {
+    "webpack-dev-server": "webpack-dev-server",
+    "webpack": "webpack",
+    "clean-public": "rm -rf dist/*",
+    "copy-ssl": "cp -r src/ssl dist",
+    "build:dev:server": "npm run webpack -- --env.mode development.server --watch",
+    "build:dev:client": "npm run webpack -- --env.mode development.client --watch",
+    "build:dev": "npm-run-all --parallel clean-public build:dev:server build:dev:client",
+    "start:dev": "nodemon --watch dist --exec \"node dist/bundle.js\"",
+    "dev": "npm-run-all --parallel start:dev build:dev",
+    "build-prod": "npm run clean-public && npm run webpack -- --env.mode production",
+    "lint": "eslint --cache .",
+    "lint-fix": "eslint --fix .",
+    "sort-out-ssl": "cd src/ssl && ./sortOutSSL.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NimishChandola/capacito.git"
+  },
+  "author": "Nimish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NimishChandola/capacito/issues"
+  },
+  "homepage": "https://github.com/NimishChandola/capacito#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "express": "^4.16.3",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.3.0",
+    "eslint-plugin-react": "^7.10.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.0.0-rc.13",
+    "mini-css-extract-plugin": "^0.4.1",
+    "nodemon": "^1.18.3",
+    "npm-run-all": "^4.1.3",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
